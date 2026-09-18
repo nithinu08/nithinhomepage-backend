@@ -20,6 +20,12 @@ type Links struct {
 	Code string `json:"code,omitempty"`
 }
 
+type GuestAccess struct {
+	Username string `json:"username,omitempty"`
+	Password string `json:"password,omitempty"`
+	Note     string `json:"note,omitempty"`
+}
+
 type Project struct {
 	Title       string   `json:"title"`
 	Description string   `json:"description"`
@@ -27,6 +33,8 @@ type Project struct {
 	Highlights  []string `json:"highlights,omitempty"`
 	TechStack   []string `json:"techStack"`
 	Links       Links    `json:"links"`
+  GuestAccess *GuestAccess `json:"guestAccess,omitempty"`
+	Screenshot  string       `json:"screenshot,omitempty"`
 }
 
 var projects = []Project{
@@ -60,6 +68,11 @@ var projects = []Project{
 			Live: "https://abs.nithinhomepage.com",
 			Code: "https://github.com/nithinu08/pi-cluster/tree/master/",
 		},
+		GuestAccess: &GuestAccess{
+			Username: "Guest",
+			Password: "Guest1234",
+			Note:			"Read-only. No upload, edit or delete access",
+		},
 	},
 	{
 		Title:       "Grafana Dashboard",
@@ -71,7 +84,23 @@ var projects = []Project{
 				"Reachable from any device on the local network",
 		},
 		TechStack:   []string{"Grafana"},
-		Links:       Links{},
+		Links:       Links{
+				Code: "https://github.com/nithinu08/pi-cluster/tree/master/monitoring",
+		},
+		Screenshot: "/screenshots/grafana-dashboard.png",
+	},
+	{
+		Title:       "Arch Linux From Scratch",
+		Description: "A fully manual Arch Linux install, no installer script built to understand Linux at the OS level rather than through a GUI.",
+		LongDescription: "The actual starting point of the mainframe-to-DevOps pivot. Every layer was configured by hand: partitioning, the boot chain, and a minimal desktop environment, to build a real mental model of how Linux works underneath.",
+		Highlights: []string{
+				"Partitioned and formatted disks manually with LVM (pvcreate, vgcreate, lvcreate)",
+				"Built the boot chain by hand: UEFI, GRUB, and an LVM-aware initramfs",
+				"Configured a minimal Hyprland desktop with Waybar and an idle-triggered lock screen",
+				"Learned systemd, package management, and log inspection from first principles",
+		},
+		TechStack: []string{"Linux", "LVM", "Hyprland"},
+		Links:     Links{},
 	},
 }
 
